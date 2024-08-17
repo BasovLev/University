@@ -1,0 +1,38 @@
+#include <stdio.h>
+ 
+void func1(int [], int, int, int);
+void func2(int [], int);
+
+int main ()
+{
+    int a, b, c, d, p[10], g[12];
+    scanf("%d%d", &a, &b);
+    scanf("%d%d", &c, &d);
+    func1(p, 10, a, b);
+    func2(p, 10);
+    func1(g, 12, c, d);
+    printf("\n");
+    func2(g, 12);
+    return 0;
+}
+
+void func1(int m[], int k, int a, int b)
+{
+    for (int i = 0; i < k; i++)
+    {
+        m[i] = a+i*b;
+    }
+}
+void func2(int m[], int k)
+{
+    for (int i = 0; i < k; i++)
+    {
+        printf ("%5d", i+1);
+    }
+    printf ("\n");
+    for (int i = 0; i < k; i++)
+    {
+        printf ("%5d", m[i]);
+    }
+    printf ("\n");
+}
