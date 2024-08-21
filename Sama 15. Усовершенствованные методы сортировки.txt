@@ -1,0 +1,46 @@
+#define _USE_MATH_DEFINES
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+#include <limits.h>
+int main(void)
+{
+    int y[100], n, i, b, j, k, f, g;
+    scanf("%d", &n);
+	f = 1;
+	g = 1;
+    for (i = 0; i<n; i++) 
+    {
+        scanf("%d",&y[i]);
+    }
+    for (k = 1; k <= n; k++) printf("%3d", k);
+		printf("\n");
+    for (i = 0; i < n; i++) printf("%3d", y[i]); 
+		printf("\n");
+	printf("\n");
+    for (j = 1; j<n; j++) {
+        for (i = 0; i<n - j; i++)
+            if (y[i]>=y[i + 1])
+            {
+                b = y[i]; 
+                y[i] = y[i + 1]; 
+                y[i + 1] = b; 
+            }
+		for (k = 1; k <= n; k++) printf("%3d", k);
+		printf("\n");
+    for (i = 0; i < n; i++) printf("%3d", y[i]); 
+		printf("\n");
+		if (j!=n-1)
+	printf("\n");
+	}
+    for (i=1; i <= n; i++) {
+		f = f*i;
+		g = g*n;
+    }
+	printf("\n");
+	printf("%3d %3d\n", f, 2*f);
+    printf("\n");
+	printf("%3d %3d\n", g, 3*g);
+	printf("\n");
+    printf("%3d\n", 3*g);  
+}

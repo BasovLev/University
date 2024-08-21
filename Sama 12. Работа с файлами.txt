@@ -1,0 +1,47 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+void printArray(int *arr, size_t size) {
+    printf("%c", ' ');
+    for (size_t i = 0; i < size; i++) {
+        printf("%2zu%c", i + 1, (i == size - 1) ? '\n' : ' ');
+    }
+    printf("%c", ' ');
+    for (size_t i = 0; i < size; i++) {
+        printf("%2d%c", arr[i], (i == size - 1) ? '\n' : ' ');
+    }
+}
+
+void swap(int *arr, size_t i) {
+    int last_el = arr[i];
+    arr[i] = arr[i - 1];
+    arr[i - 1] = last_el;
+}
+
+void delete(int *arr, size_t *size, size_t k) {
+    for (size_t i = k - 1; i < (*size) - 1; i++) {
+        arr[i] = arr[i + 1];
+    }
+    (*size)--;
+    arr = (int *)realloc(arr, (*size) * sizeof(int));
+}
+
+int main() {
+    srand(time(NULL));
+    size_t n, i, k;
+    scanf("%zu", &n);
+    scanf("%zu", &i);
+    scanf("%zu", &k);
+    int *arr = (int *)malloc(n * sizeof(int));
+    for (size_t i = 0; i < n; i++) {
+        arr[i] = rand() % 25 + 1;
+    }
+    printArray(arr, n);
+    swap(arr, i);
+    printf("\n");
+    delete(arr, &n, k);
+    printArray(arr, n);
+    free(arr);
+    return 0;
+}

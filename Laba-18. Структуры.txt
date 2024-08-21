@@ -1,0 +1,71 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int main()
+{
+    int n, d; 
+    scanf("%d", &n);
+    struct idcard {
+        char surname[20];
+        char name[20];
+        int curs;
+        double math;
+        double phis;
+        double infa;
+    } person[n];
+    
+
+    for(int i=0; i<n; i++){
+        scanf("%s", person[i].surname);
+        scanf("%s", person[i].name);
+        scanf("%d", &person[i].curs);
+        scanf("%lf", &person[i].math);
+        scanf("%lf", &person[i].phis);
+        scanf("%lf", &person[i].infa);
+    }
+    
+    
+    for(int i=0; i<n; i++){
+        printf("%-15s", person[i].surname);
+        printf("%-15s", person[i].name);
+        printf("%5d", person[i].curs);
+        printf("%5.lf", person[i].math);
+        printf("%5.lf", person[i].phis);
+        printf("%5.lf\n", person[i].infa);
+    } printf("\n");
+    
+    
+    double max;
+    int key=0;
+    for(int i=0; i<n; i++){
+        if(person[i].curs==1){
+            if(key==0){
+                key=1;
+                max=(person[i].math + person[i].phis + person[i].infa)/3.0;
+            }
+            else if((person[i].math + person[i].phis + person[i].infa)/3.0 > max)
+            {
+                max = (person[i].math + person[i].phis + person[i].infa)/3.0;
+                
+            }
+        }
+    }
+    d=0;
+    for(int i=0; i<n; i++){
+        if(person[i].curs==1){
+            if(max == (person[i].math + person[i].phis + person[i].infa)/3.0)
+            {
+			    d+=1;
+                printf("%s ", person[i].surname);
+                printf("%s\n", person[i].name);
+				if (d==1)
+				{
+					printf("\n");
+				}
+			}
+        }
+    }
+    
+    return 0;
+}

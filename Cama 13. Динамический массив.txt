@@ -1,0 +1,131 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void func1 (int*, int);  
+void func2 (int*, int);  
+void func3 (int*, int, int, int); 
+void func4 (int*, int); 
+
+void dopfunc5(int*, int); 
+void dopfunc6(); 
+void dopfunc7(int**, int*, int); 
+void dopfunc8(int**, int*, int, int); 
+void swapfunc (int*, int);
+int main()
+{
+    int n, diap=10;
+    int *p;
+    int high=18, low=12;
+    int k=3, m=5;   
+    scanf("%d", &n); 
+    p = (int *) malloc(diap * sizeof (int));
+
+    func3(p, diap, high, low);  
+    func4(p, diap); printf("\n");
+    
+    swapfunc(p,n);     
+    func4(p, diap); printf("\n");
+    
+    dopfunc5(p, diap); 
+    dopfunc6(p, diap);
+    
+    dopfunc7(&p, &diap, k);       
+    func4(p, diap); printf("\n");
+    
+    dopfunc8(&p, &diap, m, k);   
+    func4(p, diap); printf("\n");
+    return 0;
+}
+
+
+
+void func1 (int *p, int diap){
+    for(int i=0; i<diap; i++){
+	
+        *(p+i)=0;
+    }
+}
+
+
+void func2 (int *p, int diap){
+    for(int i=0; i<diap; i++)
+	{
+	
+        scanf("%d",(p+i));
+    }
+}
+
+void func3 (int *p, int diap, int high, int low){
+    for(int i=0; i<diap; i++){
+	
+       *(p+i)= rand()%(high-low+1) + low;
+    }
+}
+void func4 (int *p, int diap){
+    for ( int i=0; i<diap; ++i) {
+	
+    printf("%3d", i+1);
+    } 
+	printf("\n");
+    
+    for ( int i=0; i<diap; ++i) {
+        printf("%3d", *(p+i));
+    } 
+	printf("\n");
+}
+void dopfunc5(int *p, int diap){
+    FILE *f;
+    f=fopen("f.txt", "w");
+    for(int i=0; i<diap; i++){
+	
+        fprintf(f, "%d ", *(p+i));
+    } 
+	fprintf(f, "\n");
+    fclose(f);
+}
+void dopfunc6(){
+    FILE *f;
+    f=fopen("f.txt", "r");
+    int ch;
+    while ((ch = getc(f)) != EOF) putchar(ch);
+    printf("\n");
+    fclose(f);
+}
+
+void dopfunc7 (int **p, int *diap, int k){
+    int *q;
+    *diap -= 1;
+    for(int i=k-1; i<*diap; i++) (*p)[i]=(*p)[i+1]; 
+    q = (int*) realloc(*p, (*diap)*sizeof(int)); 
+    *p = q;
+}
+
+void dopfunc8 (int **p, int *diap, int m, int k){
+    int *q; 
+    *diap += 1;
+    q = (int*) realloc(*p, (*diap)*sizeof(int)); 
+    *p = q;
+    
+    for(int i=*diap; i>k-1; i--) (*p)[i]=(*p)[i-1];
+    (*p)[k-1]=m;
+}
+
+void swapfunc (int *p, int n){
+    int start=n, prom1, prom2; 
+    
+    for(int i=n-1; start<2*n; i--){
+        int h=0;
+        while(i-h){
+            prom1 = *(p+start-h);
+            prom2 = *(p+start-1-h);
+            *(p+start-1-h)=prom1;
+            *(p+start-h)=prom2;
+            h++;
+        }
+        start++;
+    }
+}
+
+
+
+

@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+#define IN 1 /* внутри слова */
+#define OUT 0 /* снаружи слова */
+int main(void) {
+    char str[100];
+    int c= 0, l, i;
+    fgets(str, 100, stdin); /* Считываем строку с помощью fgets */
+
+    l = strlen(str);
+    /* Разделяем строку на слова */
+	for (int i = 0; str[i] != '\0'; i++) {
+        if (str[i] == ' ')
+        {
+            continue;
+        }
+        if (isalpha(str[i]))
+        {
+            c++;
+            printf("%c", str[i]);
+            for (int j = i + 1; isalpha(str[j]); j++)
+            {
+                printf("%c", str[j]);
+                i++;
+            }
+            printf("\n");
+        }
+    }
+    printf("\n");
+    printf("%d\n", c);
+
+    return 0;
+}

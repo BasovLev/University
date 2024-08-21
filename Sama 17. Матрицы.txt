@@ -1,0 +1,148 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void func1(int high, int low, int m, int matrix[][m]);
+void func2(int m, int matrix[][m]);
+void func31(int m, int matrix[][m]);
+void func32();
+void func4(int m, int matrix[][m], int matrixT[][m]);
+void func5(int m, int matrix1[m][m], int matrix2[m][m], int matrixS[m][m]);
+void func6(int m1, int m2, int matrix1[m1][m1], int matrix2[m2][m2], int matrixM[m1][m2]);
+void func7(int m, int matrix[][m], int matrixD[][m], int degree);
+int main() {
+    int m;
+    scanf("%d", &m);
+    int matrix[m][m],
+    matrixT[m][m],
+    matrixS[m][m],
+    matrixM[m][m],
+    matrixD[m][m];
+    int high=3, low=1;
+
+    func1(high, low, m, matrix);
+    func2(m, matrix);
+    printf ("\n");
+    //func31(m, m, matrix); func32();
+    func4(m, matrix, matrixT);
+    //func5(m, m, matrix, matrix, matrixS); func2(m, n, matrixS);
+    func6(m, m, matrixT, matrix, matrixM);
+    func7(m, matrixM, matrixD, 2);
+    func2(m, matrixD);
+    return 0;
+}
+
+void func1(int high, int low, int m, int matrix[][m]) {
+    int q=1;
+    for (int i=0; i<m; i++)
+    {
+        for (int j=0; j<m; j++)
+        {
+            //matrix[i][j] = rand()%(high-low+1) + low;
+            //matrix[i][j] = q++;
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+}
+
+
+void func2(int m, int matrix[][m]) {
+    for (int i=0; i<m; i++)
+    {
+        for (int j=0; j<m; j++)
+        {
+            printf ("%6d", matrix[i][j]);
+        }
+        printf ("\n");
+    }
+}
+
+void func31(int m, int matrix[][m]) {
+    FILE *f;
+    f=fopen("f.txt", "w");
+    for (int i=0; i<m; i++)
+    {
+        for (int j=0; j<m; j++)
+        {
+            fprintf(f, "%6d", matrix[i][j]);
+        }
+    fprintf(f, "\n");
+    }
+    fprintf(f, "\n");
+    fclose(f);
+}
+
+void func32() {
+    FILE *f;
+    f=fopen("f.txt", "r");
+    int ch;
+    while ((ch = getc(f)) != EOF) putchar(ch);
+    printf("\n");
+    fclose(f);
+}
+
+void func4(int m, int matrix[][m], int matrixT[][m]) {
+    for (int i=0; i<m; i++)
+    {
+        for (int j=0; j<m; j++)
+        {
+            matrixT[j][i]=matrix[i][j];
+        }
+    }
+}
+
+void func5(int m, int matrix1[m][m], int matrix2[m][m], int matrixS[m][m]) {
+    for (int i=0; i<m; i++)
+    {
+        for (int j=0; j<m; j++)
+        {
+            matrixS[i][j]=matrix1[i][j]+matrix2[i][j];
+        }
+    }
+}
+
+void func6(int m1, int m2, int matrix1[m1][m1], int matrix2[m2][m2], int matrixM[m1][m2]) {
+    for (int i=0; i<m1; i++)
+    {
+        for(int k=0; k<m2; k++)
+        {
+            matrixM[i][k]=0;
+            for (int j=0; j<m1; j++)
+            {
+                matrixM[i][k]+=matrix1[i][j]*matrix2[j][k];
+            }
+        }
+    }
+}
+
+void func7(int m, int matrix[][m], int matrixD[][m], int degree) {
+    int matrixDOP[m][m];
+    for (int i=0; i<m; i++)
+    {
+        for (int j=0; j<m; j++)
+        {
+            matrixDOP[i][j]=matrix[i][j];
+        }
+    }
+    while(degree!=1)
+    {
+        for (int i=0; i<m; i++)
+        {
+            for(int k=0; k<m; k++)
+            {
+                matrixD[i][k]=0;
+                for (int j=0; j<m; j++)
+                {
+                    matrixD[i][k]+=matrix[i][j]*matrixDOP[j][k];
+                }
+            }
+        }
+        for (int i=0; i<m; i++)
+        {
+            for (int j=0; j<m; j++)
+            {
+                matrixDOP[i][j]=matrixD[i][j];
+            }
+        }
+    degree-=1;
+    }
+}

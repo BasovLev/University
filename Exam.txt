@@ -1,0 +1,44 @@
+#include <stdio.h>
+
+int main() {
+    int n, i, j, min, d;
+	scanf("%d", &n);
+    int m[n][n];
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            scanf("%d", &m[i][j]);
+        }
+    }
+
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            printf("%6d", m[i][j]);
+        }
+        printf("\n");
+    }
+    for (j = 0; j < n; j++) {
+        min = m[0][j];
+        d = 0;
+        for (i = 1; i < n; i++) {
+            if (m[i][j] < min) {
+                min= m[i][j];
+                d= i;
+            }
+        }
+        for (i = 0; i < n; i++) {
+            if (m[i][j] == min) {
+                d = i;
+                m[d][j]= j + 1;
+            }
+        }
+    }
+    printf("\n");
+
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            printf("%6d", m[i][j]);
+        }
+		printf("\n");
+    }
+    return 0;
+}
