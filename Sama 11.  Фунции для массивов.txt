@@ -1,0 +1,144 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
+C#, OCaml, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+
+void func1 (int*, int);
+void func2 (int*, int);
+void func3 (int*, int, int, int);
+void func4 (int*, int);
+int func5 (int*, int);
+double func6 (int *, int, int);
+void func7 (int*, int, int*, int, int*, int);
+const int k4=7;
+int mass[7], g=0;
+
+int main()
+{
+    int k1=8, k2=7, k3=6;
+    int high=18, low=12, beg=0, end=0;
+    int m1[k1], m2[k2], m3[k3];
+    
+    func1(mass,k4); // заполняем глобальный массив нулями
+    
+   // func3(m1,size1, high, low); //заполняем массивы 1 2 3
+   // func3(m2,size2, high, low);
+   // func3(m3,size3, high, low);
+   
+    func2(m1,k1); //заполняем массивы 1 2 3
+    func2(m2,k2);
+    func2(m3,k3);
+    
+    scanf("%d %d",&beg, &end);
+    
+    func7 (m1, k1, m2, k2, m3, k3);
+    
+    printf("%d %d %d\n",func5(m1, k1),func5(m2, k2),func5(m3, k3));
+    
+    printf("%.1f\n", func6(m3, beg, end));
+
+    func4(mass,k4-g);
+    
+    return 0;
+}
+
+void func1 (int *p, int k){
+    for(int i=0; i<k; i++){
+        *(p+i)=0;
+    }
+}
+
+void func2 (int *p, int k){
+    for(int i=0; i<k; i++){
+        scanf("%d",(p+i));
+    }
+}
+
+void func3 (int *p, int k, int high, int low){
+    for(int i=0; i<k; i++){
+       *(p+i)= rand()%(high-low+1) + low;
+    }
+}
+
+void func4 (int *p, int k){
+    printf("%d",*p);
+    for(int i=1; i<k; i++){
+       printf(" %d",*(p+i));
+    }
+        printf("\n");
+}
+
+int func5 (int *p, int k){
+  int min;
+  min = *p;
+    for(int i=0; i<k; i++){
+       if(*(p+i)<min);
+           min=*(p+i);
+    }
+    return min;
+}
+double func6 (int *p, int a, int b){
+    int sum=0;
+    for(int i=a-1; i<b; i++){
+        sum+=*(p+i);
+    }
+    return (double)sum/(b-a);
+}
+void func7 (int *p1, int k1, int *p2, int k2, int *p3, int k3){
+    int *pi=mass;
+    int key1=0,  key2=0,  key3=0;
+    int n=0;
+    for(int i=0; i<k3; i++){
+        for(int j=0; j<k2; j++){
+            if(*(p2+j)==*(p3+i)){
+                key1=1;
+            }
+        }
+    
+        if(key1==1){
+            key1=0;
+            for(int q=0; q<k1; q++){
+                if(*(p1+q)==*(p3+i)){
+                    key2=1;
+                }
+            }
+        }
+        if(key2==1){
+            key2=0;
+            for(int n=0; n<k4 && key3==0; n++){
+                if(*(pi+n)==0){
+                    *(pi+n)=*(p3+i);
+                    key3=1;
+                }
+                if(*(pi+n)==*(p3+i)){
+                    key3=1;
+                }
+            }
+        }
+        key3=0;
+    }
+
+    int Obm;
+    for(int i=0; i<k4-1; i++){
+        for(int j=0; j<k4-i-1; j++){
+            if(*(pi+j)>*(pi+j+1) && *(pi+j+1)!=0){
+                Obm=*(pi+j);
+                *(pi+j)=*(pi+j+1);
+                *(pi+j+1)=Obm;
+            }
+        }
+    }
+    g=0;   
+    for(int i=0;i<k4; i++){
+        if(*(pi+i)==0)
+            g++;
+    }
+}
+

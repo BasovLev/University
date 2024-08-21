@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+int main()
+{
+    long int k, a, f1, f2, f3, sum;
+    scanf("%li", &k);
+    a = 1;
+    f1 = 0;
+    f2 = 1;
+    sum = 1;
+    while(k>a)
+    {
+        f3 = f2 + f1;
+        printf("%3li  %li\n", a, sum);
+        sum += f3;
+        f1 = f2;
+        f2 = f3;
+        a++;
+    }
+    printf("%3li  %li\n", a, sum);
+    printf("\n");
+    while(sum <= 2147483647-f3)
+    {
+        f3 = f2 + f1;
+        sum += f3;
+        f1 = f2;
+        f2 = f3;
+        a++;
+    }
+    printf("%3li  %li\n", a-2, sum-f2-f1);
+    printf("%3li  %li\n", a-1, sum-f2);
+    printf("%3li  %li\n", a, sum);
+}

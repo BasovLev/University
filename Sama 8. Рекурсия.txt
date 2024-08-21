@@ -1,0 +1,57 @@
+#include <stdio.h>
+
+#include <math.h>
+long int Sp (double, double, double, int, double , double );
+int main(){
+    
+    double a, b, c, n, m, k, q, w;
+    
+    int d;
+    d=0;
+    scanf("%lf", &a);
+
+    scanf("%lf", &b);
+    
+    scanf("%lf", &c);
+    
+    k= Sp (a, b, c, d, n, m);
+    
+    if (d=0){
+        printf("%lf\n", k);
+        printf("%.6f\n", n);
+        printf("%.6f\n", m);
+    }
+    else if ((d==1) || (d==3))
+    {
+        
+        printf("%lf\n", k);
+    }
+    else if (d==2)
+    {
+        printf("%lf\n", k);
+        printf("%.6f\n", n);
+        printf("%d\n", 0);
+    }
+    return 0;
+
+}
+
+long int Sp (double a, double b, double c, int d, double n, double m){
+    double p;
+    if ((a<=0) || (b<=0) || (c<=0)){
+        d=1;
+    }
+    else if ((a=b+c) || (b=a+c) || (c=a+b)){
+        d=2;
+    }
+    else if ((a>b+c) || (b>a+c) || (c>a+b)){
+        d=3;
+    }
+    p=(a+b+c)/2.0;
+    
+    n=(a+b+c);
+    
+    m=sqrt(p*(p-a)*(p-b)*(p-c));
+    
+    return d; 
+}

@@ -1,0 +1,19 @@
+#include <stdio.h>
+
+int main() 
+{
+    int b, c, d, n, k1, k2, k3, k4;
+    int a, s;
+    scanf("%d", &a);
+    scanf("%d %d %d %d", &b, &c, &d, &n); 
+    s = (a/1000)*((a/100)%10)*((a%100)/10)*(a%10);
+    printf("%d\n", s);
+    printf("\n");
+    k1 = -(b + c + d + n);
+    k2 = b*c + b*d + b*n + c*d + c*n + d*n;
+    k3 = -(b*c*d + b*d*n+ b*c*n + c*d*n);
+    k4 = b*c*d*n;
+    printf("%5d %4d %4d %4d %4d\n", 4, 3, 2, 1, 0);
+    printf("%5d %4d %4d %4d %4d\n", 1, k1, k2, k3, k4);
+    return 0;
+}

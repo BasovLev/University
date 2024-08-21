@@ -1,0 +1,34 @@
+#include <stdio.h>
+
+int main()
+{
+    int a, b, c, d, i, j, k;
+    scanf("%d", &k);
+    long sum;
+    a = 1;
+    c = 1;
+    sum = 0;
+    b = 0;
+    i = 1;
+    while (sum <= 2147483647) {
+        a = i;
+        for (j=1; j<=k; j++) {
+            c *= a;
+
+            
+        }
+        sum += c;
+        if (sum > 2147483647) {
+            b = i;
+            printf("%ld\n", sum-c);
+            d = c;
+        }
+        c = 1;
+        i++;
+    }
+    printf("%d\n", b-1);
+    if ((sum-d)<=2147483647)
+        printf("+");
+    else
+        printf("*");
+}
